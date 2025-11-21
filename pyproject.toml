@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "CIS4020"
+version = "0.1.0"
+description = "CIS4020-FINAL"
+authors = ["Taylor Elliott <tellio02@uoguelph.ca>"]
+readme = "README.md"
+license = "MIT"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^1.24"
+pandas = "^2.0"
+scikit-learn = "^1.1"
+matplotlib = "^3.5"
+seaborn = "^0.11"
+tensorflow = "^2.10"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0"
+pytest-cov = "^3.0"
+black = "^22.0"
+flake8 = "^5.0"
+mypy = "^0.931"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
