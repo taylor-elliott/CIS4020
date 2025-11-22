@@ -30,6 +30,10 @@ jobs:
         run: poetry cache clear pypi --all --no-interaction  # Clear Poetry's cache
         working-directory: .  # Ensure we're in the root directory
 
+      - name: Regenerate Poetry Lock File
+        run: poetry lock  # Regenerate poetry.lock file based on pyproject.toml
+        working-directory: .  # Ensure we're in the root directory
+
       - name: Install Dependencies (Verbose)
         run: |
           echo "Current directory: $(pwd)"
