@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 
 class Config:
-"""Configuration loader and manager."""
+    """Configuration loader and manager."""
 
     def __init__(self, config_path: Optional[str] = None):
         """
@@ -92,16 +92,44 @@ class Config:
         return self.get_path("paths.processed_data")
 
     @property
-    def processed_pima(self) -> str:
-        result = self.get("processed", "processed_pima_diabetes.csv")
-        return str(result)
+    def raw_pima_filename(self) -> str:
+        """Get raw Pima diabetes filename."""
+        return str(self.get("files.raw_pima", "pima_diabetes.csv"))
 
     @property
-    def processed_syn(self) -> str:
-        result = self.get("processed", "processed_syn_diabetes.csv")
-        return str(result)
+    def processed_pima_filename(self) -> str:
+        """Get processed Pima diabetes filename."""
+        return str(self.get("files.processed_pima", "processed_pima_diabetes.csv"))
 
     @property
+    def raw_syn_filename(self) -> str:
+        """Get raw synthetic diabetes filename."""
+        return str(self.get("files.raw_syn", "syn_diabetes.csv"))
+
+    @property
+    def processed_syn_filename(self) -> str:
+        """Get processed synthetic diabetes filename."""
+        return str(self.get("files.processed_syn", "processed_syn_diabetes.csv"))
+
+    @property
+    def raw_pima_path(self) -> str:
+        """Get the full absolute path to the raw Pima file."""
+        return str(Path(self.raw_data_dir) / self.raw_pima_filename)
+
+    @property
+    def processed_pima_path(self) -> str:
+        """Get the full absolute path to the processed Pima file."""
+        return str(Path(self.processed_data_dir) / self.processed_pima_filename)
+
+    @property
+    def raw_syn_path(self) -> str:
+        """Get the full absolute path to the raw synthetic file."""
+        return str(Path(self.raw_data_dir) / self.raw_syn_filename)
+
+    @property
+    def processed_syn_path(self) -> str:
+        """Get the full absolute path to the processed synthetic file."""
+        return str(Path(self.processed_data_dir) / self.processed_syn_filename)    @property
     def log_dir(self) -> str:
         """Get logs directory path."""
         return self.get_path("paths.logs")
@@ -168,9 +196,13 @@ class Config:
         return int(result)
 
     @property
-    def preview_full(self) -> int:
-        result = self.get("processing.show_full_preview", True)
-        return int(result)
+    def show_preview_dataset(self) -> bool:
+        result = self.get("processing.show_preview_dataset", False)
+        return bool(result)
+
+    def show_features_target(self) -> bool:
+        result = self.get("processing.show_features_target", False)
+        return bool(result)
 
     @property
     def continue_on_error(self) -> bool:
