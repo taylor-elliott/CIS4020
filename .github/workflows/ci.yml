@@ -2,7 +2,7 @@ name: Python Tests Nox
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ dev ]
 
 jobs:
   test:
