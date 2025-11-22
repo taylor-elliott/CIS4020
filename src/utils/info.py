@@ -1,22 +1,26 @@
 import pandas as pd
 
 
-def preview_dataset(df: pd.DataFrame, show_preview: bool = True) -> None:
-    """
-    Display preview information about a dataset.
+def preview_dataset(df: pd.DataFrame, show: bool = True) -> None:
+    if df is None: return
 
-    Args:
-        df: DataFrame to preview
-        show_preview: Whether to show the preview
-    """
-    if not show_preview:
-        return
+    if show:
+        print(f"\nDataset shape: {df.shape}")
+        print(f"\nColumn names: {list(df.columns)}")
+        print("\nData types:")
+        print(df.dtypes)
+        print("\nDF HEAD:\n")
+        print(df.head())
+        print("\nDF TAIL:\n")
+        print(df.tail())
 
-    print(f"\nDataset shape: {df.shape}")
-    print(f"\nColumn names: {list(df.columns)}")
-    print("\nFirst few rows:")
-    print(df.head())
-    print("\nData types:")
-    print(df.dtypes)
-    print("\nBasic statistics:")
-    print(df.describe())
+def preview_features_target(X, y, show: bool = True) -> None:
+    if X is None or y is None: return
+
+    if show:
+        print("\nFeatures\n")
+        print(X)
+        print("\nTARGET:\n")
+        print(y)
+
+

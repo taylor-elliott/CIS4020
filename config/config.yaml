@@ -38,4 +38,6 @@ processing:
   save_index: false
   show_preview_rows: 3
   continue_on_error: true
-  show_full_preview: true
+  show_preview_dataset: true
+  show_features_target: true
+
