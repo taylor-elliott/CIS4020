@@ -24,7 +24,7 @@ ML_DEPENDENCIES = [
 @nox.session(python=PYTHON_VERSIONS)
 def tests(session):
     session.install("poetry")
-    session.run("poetry", "install", "--no-interaction",external=True)
+    session.run("poetry", "install", "--no-interaction")
     session.run("pytest")
 
 @nox.session(python=PYTHON_VERSIONS)
@@ -37,10 +37,8 @@ def black(session):
     session.install("black")
     session.run("black", "src", "tests")
 
-# Nox session for type checking with mypy
 @nox.session(python=PYTHON_VERSIONS)
 def mypy(session):
     session.install("mypy", "types-PyYAML")
-    session.install("mypy")
     session.run("mypy", "src")
 
