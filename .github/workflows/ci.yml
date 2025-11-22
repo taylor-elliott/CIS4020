@@ -17,12 +17,16 @@ jobs:
       - name: Install Poetry
         run: pip install poetry
 
-      - name: Install Dependencies
-        run: poetry install --no-interaction --external
-        working-directory: .  # Ensure we're in the root directory (where pyproject.toml is)
-
       - name: Verify pyproject.toml Exists
         run: ls -la  # List files in the current directory to confirm pyproject.toml exists
+        working-directory: .  # Ensure we're in the root directory
+
+      - name: Clear Poetry Cache (Optional)
+        run: poetry cache clear pypi --all --no-interaction  # Clear Poetry's cache
+        working-directory: .  # Ensure we're in the root directory
+
+      - name: Install Dependencies (Verbose)
+        run: poetry install --no-interaction -v  # Add -v for verbose output to see more details
         working-directory: .  # Ensure we're in the root directory
 
       - name: Run Tests with Nox
