@@ -2,9 +2,8 @@ import yaml
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
-
 class Config:
-    """Configuration loader and manager."""
+"""Configuration loader and manager."""
 
     def __init__(self, config_path: Optional[str] = None):
         """
@@ -181,3 +180,4 @@ class Config:
 
     def __repr__(self) -> str:
         return f"Config(config_path='{self.config_path}')"
+
