@@ -5,28 +5,75 @@ description = "CIS4020-FINAL"
 authors = ["Taylor Elliott <tellio02@uoguelph.ca>"]
 readme = "README.md"
 license = "MIT"
+packages = [
+    { include = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.0.0"
+pyyaml = "^6.0.0"
+numpy = "^1.24.0"
+scikit-learn = "^1.3.0"
+matplotlib = "^3.7.0"
+seaborn = "^0.12.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+black = "^23.7.0"
+flake8 = "^6.1.0"
+mypy = "^1.5.0"
+nox = "^2023.4.22"
+types-pyyaml = "^6.0.12.20250915"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 77
+target-version = ['py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --strict-markers --tb=short --cov=src --cov-report=term-missing"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-numpy = "^1.24"
-pandas = "^2.0"
-scikit-learn = "^1.1"
-matplotlib = "^3.5"
-seaborn = "^0.11"
-tensorflow = "^2.10"
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = false
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+no_implicit_optional = false
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.0"
-pytest-cov = "^3.0"
-black = "^22.0"
-flake8 = "^5.0"
-mypy = "^0.931"
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*.py"]
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
