@@ -3,6 +3,12 @@ paths:
   processed_data: "data/processed"
   logs: "logs"
 
+files:
+  raw_pima: "pima_diabetes.csv"
+  processed_pima: "processed_pima_diabetes.csv"
+  raw_syn: "syn_diabetes.csv"
+  processed_syn: "processed_syn_diabetes.csv"
+
 columns:
   target:
     - Pregnancies
@@ -32,3 +38,4 @@ processing:
   save_index: false
   show_preview_rows: 3
   continue_on_error: true
+  show_full_preview: true

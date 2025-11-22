@@ -14,8 +14,6 @@ class Config:
             config_path: Path to config file. If None, uses default location.
         """
         if config_path is None:
-            # Default to config/config.yaml relative to project root
-            # This file is in src/utils/, so go up two levels
             script_dir = Path(__file__).parent
             src_dir = script_dir.parent
             project_root = src_dir.parent
@@ -95,6 +93,16 @@ class Config:
         return self.get_path("paths.processed_data")
 
     @property
+    def processed_pima(self) -> str:
+        result = self.get("processed", "processed_pima_diabetes.csv")
+        return str(result)
+
+    @property
+    def processed_syn(self) -> str:
+        result = self.get("processed", "processed_syn_diabetes.csv")
+        return str(result)
+
+    @property
     def log_dir(self) -> str:
         """Get logs directory path."""
         return self.get_path("paths.logs")
@@ -158,6 +166,11 @@ class Config:
     def preview_rows(self) -> int:
         """Get number of preview rows to show."""
         result = self.get("processing.show_preview_rows", 3)
+        return int(result)
+
+    @property
+    def preview_full(self) -> int:
+        result = self.get("processing.show_full_preview", True)
         return int(result)
 
     @property
